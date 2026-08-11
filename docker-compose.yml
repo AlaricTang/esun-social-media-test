@@ -1,0 +1,29 @@
+## cmd `docker-compose up -d` 啟動
+## cmd `docker-compose stop` 暫停
+## cmd `docker-compose down -v` 刪掉下掉
+
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: esun_social_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_passw0rd
+      MYSQL_DATABASE: esun_social_media
+      MYSQL_USER: esun_dbUser1
+      MYSQL_PASSWORD: dbUser_passw0rd1
+      TZ: Asia/Taipei
+    ports:
+      - "3306:3306"                
+    volumes: ## 目錄掛載
+      # 自動執行下列 SQL 檔
+      - ./DB/schema.sql:/docker-entrypoint-initdb.d/1_schema.sql
+      - ./DB/data.sql:/docker-entrypoint-initdb.d/2_data.sql
+      # 資料持久化(存於disk)
+      # - mysql_data:/var/lib/mysql
+      # 資料移除
+      # cmd docker-compose down -v
+volumes:
+  mysql_data:                      
