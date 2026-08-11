@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: social-media-test
+  datasource:
+    url: jdbc:mysql://localhost:3306/esun_social_media?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Taipei&allowMultiQueries=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: esun_dbUser1
+    password: dbUser_passw0rd1
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
