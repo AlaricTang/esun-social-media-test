@@ -3,7 +3,7 @@ package esun.social_media_test.service.impl;
 import java.util.List;
 import java.util.Map;
 
-public interface PostServiceImpl {
+public interface PostService {
 
 	/** 發布新文章 */
 	void createPost(Integer userId, String content, String image);

@@ -4,7 +4,7 @@ import java.util.List;
 
 import esun.social_media_test.entity.Comment;
 
-public interface CommentServiceImpl {
+public interface CommentService {
 
 	/** 新增留言 */
 	Comment addComment(Integer userId, Integer postId, String content);

@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import esun.social_media_test.repository.PostRepository;
-import esun.social_media_test.service.impl.PostServiceImpl;
+import esun.social_media_test.service.impl.PostService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
-public class PostService implements PostServiceImpl {
+public class PostServiceImpl implements PostService {
 
 	@Autowired
 	private PostRepository postRepo;
@@ -20,6 +22,7 @@ public class PostService implements PostServiceImpl {
 	@Transactional
 	public void createPost(Integer userId, String content, String image) {
 		if (content == null || content.trim().isEmpty()) {
+			log.warn("新增貼文失敗：內容為空 - userId: {}", userId);
 			throw new IllegalArgumentException("發文內容不能為空！");
 		}
 

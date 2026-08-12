@@ -4,7 +4,7 @@ import esun.social_media_test.dto.GetUserByMobileReq;
 import esun.social_media_test.dto.GetUserByMobileResp;
 import esun.social_media_test.entity.User;
 
-public interface UserServiceImpl {
+public interface UserService {
 
 	/** 註冊使用者 */
 	void register(String mobile, String userName, String email, String rawPassword);
