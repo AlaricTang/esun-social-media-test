@@ -54,7 +54,7 @@ public class WebExceptionHandler {
 	 */
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResp> handleGlobalException(Exception ex) {
-		log.error("系統發生未預期異常", ex);
+		log.error("internal server error", ex);
 
 		ErrorResp error = new ErrorResp(HttpStatus.INTERNAL_SERVER_ERROR.value(), "系統忙碌中，請稍後再試！", LocalDateTime.now());
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
