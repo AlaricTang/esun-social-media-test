@@ -1,5 +1,6 @@
 -- 匯入測試data
-
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
 -- user
 INSERT INTO sys_user (user_id, mobile, user_name, email, password, salt, biography, cover_image) 
 VALUES 
