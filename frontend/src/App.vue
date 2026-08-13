@@ -61,7 +61,7 @@ async function handlePostCreated() {
 
 <template>
   <div class="bg-light min-vh-100">
-    <AppNav :current-page="currentPage" @change-page="changePage" />
+    <AppNav :current-page="currentPage" :user="user" @change-page="changePage" />
 
     <main class="container py-4">
       <UserStatus :user="user" @logout="logout" />

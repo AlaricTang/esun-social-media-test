@@ -3,6 +3,10 @@ defineProps({
   currentPage: {
     type: String,
     required: true
+  },
+  user: {
+    type: Object,
+    default: null
   }
 })
 
@@ -17,6 +21,7 @@ const emit = defineEmits(['change-page'])
       </button>
       <div class="d-flex gap-2 flex-wrap">
         <button
+          v-if="!user"
           class="btn"
           :class="currentPage === 'register' ? 'btn-primary' : 'btn-outline-primary'"
           @click="emit('change-page', 'register')"
