@@ -4,14 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import esun.social_media_test.dto.CreatePostReq;
 import esun.social_media_test.dto.GetAllPostsResp;
+import esun.social_media_test.dto.UpdatePostReq;
 import esun.social_media_test.exception.DataNotFoundException;
 import esun.social_media_test.service.impl.PostService;
 import jakarta.validation.Valid;
@@ -39,5 +43,20 @@ public class PostController extends ControllerBase {
 	@GetMapping("/getAllPosts")
 	public ResponseEntity<GetAllPostsResp> getAllPosts() {
 		return ResponseEntity.ok(new GetAllPostsResp(postService.getAllPosts()));
+	}
+
+	@PutMapping("/posts/{postId}")
+	public ResponseEntity<Void> updatePost(@PathVariable Integer postId, @Valid @RequestBody UpdatePostReq req,
+			Errors err) throws DataNotFoundException {
+		validateRequest(err);
+		postService.updatePost(postId, req);
+		return ResponseEntity.ok().build();
+	}
+
+	@DeleteMapping("/posts/{postId}/users/{userId}")
+	public ResponseEntity<Void> deletePost(@PathVariable Integer postId, @PathVariable Integer userId)
+			throws DataNotFoundException {
+		postService.deletePost(postId, userId);
+		return ResponseEntity.noContent().build();
 	}
 }

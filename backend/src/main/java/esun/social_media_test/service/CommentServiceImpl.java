@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import esun.social_media_test.dto.AddCommentReq;
 import esun.social_media_test.dto.AddCommentResp;
+import esun.social_media_test.dto.GetCommentDto;
 import esun.social_media_test.entity.Comment;
 import esun.social_media_test.exception.DataNotFoundException;
 import esun.social_media_test.repository.CommentRepository;
@@ -32,7 +33,6 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	@Transactional
 	public AddCommentResp addComment(AddCommentReq req) throws DataNotFoundException {
-
 		Integer userId = req.getUserId();
 		Integer postId = req.getPostId();
 		String content = req.getContent();
@@ -43,6 +43,7 @@ public class CommentServiceImpl implements CommentService {
 		if (!postRepo.existsById(postId)) {
 			throw new DataNotFoundException("post not found");
 		}
+
 		Comment comment = new Comment();
 		comment.setUserId(userId);
 		comment.setPostId(postId);
@@ -51,14 +52,12 @@ public class CommentServiceImpl implements CommentService {
 		return new AddCommentResp(commentRepo.save(comment));
 	}
 
-	/** 依文章 ID 查詢所有留言 */
 	@Override
 	@Transactional(readOnly = true)
-	public List<Comment> getCommentsByPostId(Integer postId) throws DataNotFoundException {
+	public List<GetCommentDto> getCommentsByPostId(Integer postId) throws DataNotFoundException {
 		if (!postRepo.existsById(postId)) {
 			throw new DataNotFoundException("post not found");
 		}
-		return commentRepo.findByPostIdOrderByCreatedAtAsc(postId);
+		return commentRepo.getCommentsWithUserByPostId(postId);
 	}
-
 }
