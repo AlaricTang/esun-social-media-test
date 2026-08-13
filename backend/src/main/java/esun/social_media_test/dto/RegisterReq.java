@@ -7,16 +7,16 @@ import lombok.Data;
 @Data
 public class RegisterReq {
 
-	@NotBlank(message = "mobile 不得為空")
-	@Pattern(regexp = "^[0-9]{10}$", message = "mobile 只能為10碼數字")
+	@NotBlank(message = "mobile is required")
+	@Pattern(regexp = "^[0-9]{10}$", message = "mobile format is invalid")
 	private String mobile;
 
-	@NotBlank(message = "userName 不得為空")
+	@NotBlank(message = "userName is required")
 	private String userName;
 
-	@Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$", message = "需符合 Email 格式")
+	@Pattern(regexp = "(^$)|(^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$)", message = "email format is invalid")
 	private String email;
 
-	@NotBlank(message = "password 不得為空")
+	@NotBlank(message = "password is required")
 	private String password;
 }

@@ -6,11 +6,11 @@ import lombok.Data;
 
 @Data
 public class LoginReq {
-	
-	@NotBlank(message="mobile 不得為空")
-	@Pattern(regexp = "^[0-9]{10}$", message="mobile 只能為10碼數字")
+
+	@NotBlank(message = "mobile is required")
+	@Pattern(regexp = "^[0-9]{10}$", message = "mobile format is invalid")
 	private String mobile;
-	
-	@NotBlank(message="password 不得為空")
+
+	@NotBlank(message = "password is required")
 	private String password;
 }
